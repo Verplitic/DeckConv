@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	yaml "gopkg.in/yaml.v3"
+	"gopkg.in/yaml.v3"
 	"math/bits"
 	"os"
 	"path/filepath"
@@ -12,6 +12,13 @@ import (
 	"strconv"
 	"strings"
 )
+
+type FileInst struct {
+	OriginalPath string
+	Directory    string
+	FileName     string
+	FileType     string
+}
 
 func (fi *FileInst) Init() error {
 	info, err := os.Stat(fi.OriginalPath)
@@ -176,7 +183,7 @@ func (fi *FileInst) Convert(data map[string]interface{}) error {
 			}
 		}
 
-		marshalledData, err := json.Marshal(data)
+		marshalledData, err := json.MarshalIndent(data, "", "\t")
 		if err != nil {
 			return fmt.Errorf("转换为JSON时出现错误：%s", err)
 		}

@@ -8,13 +8,6 @@ import (
 	"runtime"
 )
 
-type FileInst struct {
-	OriginalPath string
-	Directory    string
-	FileName     string
-	FileType     string
-}
-
 var scanner = bufio.NewScanner(os.Stdin)
 
 func main() {
